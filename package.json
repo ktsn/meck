@@ -1,9 +1,16 @@
 {
-  "name": "mec",
+  "name": "meck",
   "version": "0.0.0",
   "author": "katashin",
-  "description": "",
-  "keywords": [],
+  "description": "Small and type safe message bus with well module separation",
+  "keywords": [
+    "event",
+    "event bus",
+    "type safe",
+    "TypeScript",
+    "separation of concerns",
+    "cqrs"
+  ],
   "license": "MIT",
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
