@@ -1,6 +1,6 @@
 {
   "name": "meck",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "katashin",
   "description": "Small and type safe message bus with well module separation",
   "keywords": [
