@@ -1,9 +1,11 @@
+type StringKeyOf<T> = Extract<keyof T, string>
+
 export interface Emit<Payloads> {
-  <Name extends keyof Payloads>(name: Name, payload: Payloads[Name]): void
+  <Name extends StringKeyOf<Payloads>>(name: Name, payload: Payloads[Name]): void
 }
 
 export interface Observe<Payloads> {
-  <Name extends keyof Payloads>(
+  <Name extends StringKeyOf<Payloads>>(
     name: Name,
     cb: (payload: Payloads[Name]) => void
   ): void
@@ -43,7 +45,7 @@ export class EventObserver<Events> {
     })
   }
 
-  on<Name extends keyof Events>(
+  on<Name extends StringKeyOf<Events>>(
     name: Name,
     cb: (payload: Events[Name]) => void
   ): void {
@@ -70,7 +72,7 @@ export class CommandEmitter<Commands> {
     })
   }
 
-  emit<Name extends keyof Commands>(name: Name, payload: Commands[Name]): void {
+  emit<Name extends StringKeyOf<Commands>>(name: Name, payload: Commands[Name]): void {
     if (this.listeners) {
       emit(this.listeners, name, payload)
     }
@@ -89,7 +91,7 @@ export class MessageBus<Events, Commands> {
     private commandEmitters: CommandEmitter<Commands>[]
   ) {}
 
-  on<Name extends keyof Events>(
+  on<Name extends StringKeyOf<Events>>(
     name: Name,
     cb: (payload: Events[Name]) => void
   ): void {
@@ -98,7 +100,7 @@ export class MessageBus<Events, Commands> {
     })
   }
 
-  emit<Name extends keyof Commands>(name: Name, payload: Commands[Name]): void {
+  emit<Name extends StringKeyOf<Commands>>(name: Name, payload: Commands[Name]): void {
     this.commandEmitters.forEach(c => {
       c.emit(name, payload)
     })
