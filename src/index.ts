@@ -1,7 +1,10 @@
 type StringKeyOf<T> = Extract<keyof T, string>
 
 export interface Emit<Payloads> {
-  <Name extends StringKeyOf<Payloads>>(name: Name, payload: Payloads[Name]): void
+  <Name extends StringKeyOf<Payloads>>(
+    name: Name,
+    payload: Payloads[Name]
+  ): void
 }
 
 export interface Observe<Payloads> {
@@ -72,7 +75,10 @@ export class CommandEmitter<Commands> {
     })
   }
 
-  emit<Name extends StringKeyOf<Commands>>(name: Name, payload: Commands[Name]): void {
+  emit<Name extends StringKeyOf<Commands>>(
+    name: Name,
+    payload: Commands[Name]
+  ): void {
     if (this.listeners) {
       emit(this.listeners, name, payload)
     }
@@ -100,7 +106,10 @@ export class MessageBus<Events, Commands> {
     })
   }
 
-  emit<Name extends StringKeyOf<Commands>>(name: Name, payload: Commands[Name]): void {
+  emit<Name extends StringKeyOf<Commands>>(
+    name: Name,
+    payload: Commands[Name]
+  ): void {
     this.commandEmitters.forEach(c => {
       c.emit(name, payload)
     })
